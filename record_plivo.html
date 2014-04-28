@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>VNSPR - Recording</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron-narrow.css" rel="stylesheet">
+  </head>
+
+  <body>
+		  
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="index.html">Home</a></li>
+		  <li class="active"><a href="#">Record</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">Vietnamese Speech Recognition Demo</h3>
+      </div>
+	  <h2>Voice Recording</h2>
+
+    <ul>
+	  <li>Chức năng ghi âm thu thập giọng nói của nhiều người nhằm giúp chương trình đạt độ chính xác cao hơn.</li>
+      <li>Đối với trình duyệt Chrome/Firefox cần hỗ trợ WebRTC để sử dụng chức năng này.</li>
+	  <li>Trình duyệt sẽ hỏi bạn về việc cho phép microphone hoạt động, vui lòng chọn "cho phép"/"allow"</li>
+	  <li>Vui lòng chọn câu/từ muốn ghi âm từ danh sách bên dưới sau đó nhấn nút "Ghi âm", vui lòng nói chậm và rõ ràng.</li>
+	  <li>Bạn có thể ghi âm nhiều lần/nhiều lựa chọn với các từ/câu khác nhau.</li>
+	 </ul> 
+	  
+	  <h2>Danh sách</h2>
+	  
+	  <select class="form-control">
+	    <option>Không</option>
+	    <option>Một</option>
+	    <option>Hai</option>
+	    <option>Ba</option>
+	    <option>Bốn</option>
+	  </select>
+
+	  <br>
+		<form class="form-horizontal">
+		<fieldset>
+		<div class="control-group">
+			<div class="controls" style="display: none" id="callcontainer">
+				<a href="#" id="make_call" class="btn main-btn btn-success" onclick="call();">Ghi Âm</a>
+			</div>
+			<div id='numbertime'>
+				<span class="label" id='time'></span>
+			</div>
+		</div>
+		
+
+		<div class="control-group" style="display: none" id="btn-oncall">
+			<div class="controls">
+				<a href="#" id="hangup_call" class="btn main-btn btn-danger" onclick="hangup();">Kết Thúc</a>
+			</div>
+		</div>
+		
+		</fieldset>
+		</form>
+
+	  
+	  <br>
+		<div class="footer">
+        	<p>VN Speech Recogptiton Online -  HaTruong 2014</p>
+      	</div> 
+    </div> <!-- /container -->
+
+	<script language="javascript" content-type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/plivo.min.js"></script>
+	<script type="text/javascript">
+
+		function webrtcNotSupportedAlert() {
+			$('#txtStatus').text("");
+			alert("Your browser doesn't support WebRTC. You need Chrome 25 to use this demo");
+		}
+
+		function isNotEmpty(n) {
+			return n.length > 0;
+		}
+
+		function formatUSNumber(n) {
+			var dest = n.replace(/-/g, '');
+			dest = dest.replace(/ /g, '');
+			dest = dest.replace(/\+/g, '');
+			dest = dest.replace(/\(/g, '');
+			dest = dest.replace(/\)/g, '');
+			if (!isNaN(dest)) {
+				n = dest
+				if (n.length == 10 && n.substr(0, 1) != "1") {
+					n = "1" + n;
+				}
+			}
+			return n;
+		}
+
+		function replaceAll(txt, replace, with_this) {
+			return txt.replace(new RegExp(replace, 'g'),with_this);
+		}
+
+		// counting time
+		var s=1,m=0,h=0,tid;
+		function counttime()
+		{
+			if(s==60){
+				m++;
+				s=0;
+			}
+			if(m==60){
+				h++;
+				m=0;
+			}
+			duration = ('0' + h).slice(-2)+':'+('0' + m).slice(-2)+':'+('0' + s).slice(-2);
+			call.duration = duration;
+			$("#time").text(' - '+ duration)
+			s++;
+		}
+			
+		
+		
+		function initUI() {
+			//callbox
+			$('#callcontainer').hide();
+			$('#numbertime').hide();
+		}
+
+		function callUI() {
+			//show outbound call UI
+			$('#btn-oncall').hide();
+			$('#make_call').show();
+			$('#numbertime').show();
+		}
+
+		function IncomingCallUI() {
+			//show incoming call UI
+		}
+
+		function callAnsweredUI() {
+			$('#make_call').hide();
+			$('#btn-oncall').show();		
+		}
+
+		function login(username, password) {
+			console.log("Now login with username: " + username);
+			Plivo.conn.login(username, password);
+		}
+
+		function logout() {
+			Plivo.conn.logout();
+		}
+
+		function onReady() {
+			console.log("onReady...");
+			$('#numbertime').hide();
+			$('#callcontainer').hide();
+		}
+
+		function onLogin() {
+			console.log('Logged in ...');
+			$('#callcontainer').show();
+			$('#numbertime').hide();
+		}
+
+		function onLoginFailed() {
+			$('#status_txt').text("Login Failed");
+		}
+
+		function onLogout() {
+			initUI();
+		}
+
+		function onCalling() {
+			console.log("onCalling ...");
+		}
+
+		function onCallRemoteRinging() {
+			console.log("onCallRemoteRinging ...");
+		}
+
+		function onCallAnswered() {
+			console.log('onCallAnswered');
+			callAnsweredUI();
+			tid = setInterval(counttime, 1000);// time count function
+			$('#numbertime').show();
+		}
+
+		function onCallTerminated() {
+			console.log("onCallTerminated");
+			clearTimeout(tid); // remove counting of time
+			callUI();
+		}
+
+		function onCallFailed(cause) {
+			console.log("onCallFailed:"+cause);
+			callUI();
+		}
+
+		function call() {
+			if ($('#make_call').text() == "Ghi Âm") {
+				var dest = "sip:abc130819030126@phone.plivo.com";
+				var callerID = $("#callerid").val();
+				var displayName = $("#displayname").val();
+				if (isNotEmpty(dest)) {
+					console.log('Calling..');
+					$("#number").text(dest);
+					s=1;m=0;h=0;
+					console.log('Making outgoing calling:');
+					$("#time").text('');					
+					Plivo.conn.call(dest);
+					$('#make_call').text("Dừng");
+				}
+				else{
+					console.log('Invalid Destination');
+				}
+
+			}
+			else if($('#make_call').text() == "Dừng") {
+				console.log('Ending Call..');
+				Plivo.conn.hangup();
+				$('#make_call').text('Ghi Âm');
+				console.log('Ready');
+			}
+		}
+
+		function hangup() {
+			console.log('Hanging up..');
+			Plivo.conn.hangup();
+			callUI()
+		}
+
+		function mute() {
+			Plivo.conn.mute();
+		}
+
+		function unmute() {
+			Plivo.conn.unmute();
+		}
+
+		function onIncomingCall(account_name, extraHeaders) {
+			console.log("onIncomingCall:"+account_name);
+		}
+
+		function onIncomingCallCanceled() {
+			callUI();
+		}
+
+		function  onMediaPermission (result) {
+			if (result) {
+				console.log("get media permission");
+			} else {
+				alert("you don't allow media permission, you will can't make a call until you allow it");
+			}
+		}
+
+
+
+		$(document).ready(function() {
+			Plivo.onWebrtcNotSupported = webrtcNotSupportedAlert;
+			Plivo.onReady = onReady;
+			Plivo.onLogin = onLogin;
+			Plivo.onLoginFailed = onLoginFailed;
+			Plivo.onLogout = onLogout;
+			Plivo.onCalling = onCalling;
+			Plivo.onCallRemoteRinging = onCallRemoteRinging;
+			Plivo.onCallAnswered = onCallAnswered;
+			Plivo.onCallTerminated = onCallTerminated;
+			Plivo.onCallFailed = onCallFailed;
+			Plivo.onMediaPermission = onMediaPermission;
+			Plivo.onIncomingCall = onIncomingCall;
+			Plivo.onIncomingCallCanceled = onIncomingCallCanceled;
+			Plivo.init();
+			login("hatruong130814190448","abc123!!!");
+		});
+
+	</script>
+
+  </body>
+</html>

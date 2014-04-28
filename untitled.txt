@@ -1,0 +1,64 @@
+nhuthao/vndigit_0080
+nhuthao/vndigit_0081
+nhuthao/vndigit_0082
+nhuthao/vndigit_0083
+nhuthao/vndigit_0084
+nhuthao/vndigit_0085
+nhuthao/vndigit_0086
+nhuthao/vndigit_0087
+nhuthao/vndigit_0088
+nhuthao/vndigit_0089
+<s> khoong </s> (vndigit_0080)
+<s> mootj </s> (vndigit_0081)
+<s> hai </s> (vndigit_0082)
+<s> ba </s> (vndigit_0083)
+<s> boons </s> (vndigit_0084)
+<s> nawm </s> (vndigit_0085)
+<s> saus </s> (vndigit_0086)
+<s> baayr </s> (vndigit_0087)
+<s> tams </s> (vndigit_0088)
+<s> chins </s> (vndigit_0089)
+
+
+h/vndigit_0110
+h/vndigit_0111
+h/vndigit_0112
+h/vndigit_0113
+h/vndigit_0114
+h/vndigit_0115
+h/vndigit_0116
+h/vndigit_0117
+h/vndigit_0118
+h/vndigit_0119
+<s> chins tams baayr saus nawm boons ba hai mootj khoong </s> (vndigit_0110)
+<s> chins tams baayr saus nawm boons ba hai mootj khoong </s> (vndigit_0111)
+<s> chins tams baayr saus nawm boons ba hai mootj khoong </s> (vndigit_0112)
+<s> chins tams baayr saus nawm boons ba hai mootj khoong </s> (vndigit_0113)
+<s> chins tams baayr saus nawm boons ba hai mootj khoong </s> (vndigit_0114)
+<s> chins tams baayr saus nawm boons ba hai mootj khoong </s> (vndigit_0115)
+<s> chins tams baayr saus nawm boons ba hai mootj khoong </s> (vndigit_0116)
+<s> chins tams baayr saus nawm boons ba hai mootj khoong </s> (vndigit_0117)
+<s> chins tams baayr saus nawm boons ba hai mootj khoong </s> (vndigit_0118)
+<s> chins tams baayr saus nawm boons ba hai mootj khoong </s> (vndigit_0119)
+
+
+h/vndigit_0120
+h/vndigit_0121
+h/vndigit_0122
+h/vndigit_0123
+h/vndigit_0124
+h/vndigit_0125
+h/vndigit_0126
+h/vndigit_0127
+h/vndigit_0128
+h/vndigit_0129
+<s> khoong </s> (vndigit_0120)
+<s> mootj </s> (vndigit_0121)
+<s> hai </s> (vndigit_0122)
+<s> ba </s> (vndigit_0123)
+<s> boons </s> (vndigit_0124)
+<s> nawm </s> (vndigit_0125)
+<s> saus </s> (vndigit_0126)
+<s> baayr </s> (vndigit_0127)
+<s> tams </s> (vndigit_0128)
+<s> chins </s> (vndigit_0129)

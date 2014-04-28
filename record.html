@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>VNSPR - Recording</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron-narrow.css" rel="stylesheet">
+  </head>
+
+  <body>
+		  
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="index.html">Home</a></li>
+		  <li class="active"><a href="#">Record</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">Vietnamese Speech Recognition Demo</h3>
+      </div>
+	  <h2>Voice Recording</h2>
+
+    <ul>
+	  <li>Chức năng ghi âm thu thập giọng nói của nhiều người nhằm giúp chương trình đạt độ chính xác cao hơn.</li>
+      <li>Để đảm bảo hầu hết các trình duyệt đều hỗ trợ nên mình đã sử dụng Flash recorder.</li>
+	  <li>Trình duyệt sẽ hỏi bạn về việc cho phép microphone hoạt động, vui lòng chọn "cho phép"/"allow"</li>
+	  <li>Vui lòng chọn câu/từ muốn ghi âm từ danh sách bên dưới sau đó nhấn nút "Ghi âm", vui lòng nói chậm và rõ ràng.</li>
+	  <li>Bạn có thể ghi âm "nhiều lần"/"nhiều lựa chọn" với các từ/câu khác nhau.</li>
+	  <li>Sau khi ghi âm xong bạn có thể "Nghe Lại" và nhấn nút "Gửi File" để hoàn thành.</li>
+	  <li>Xin cảm ơn các bạn đã dành thời gian giúp đỡ!</li>
+	 </ul> 
+	  
+	  </br>
+	  <h4>Chọn câu hoặc từ ở danh sách này sau đó nhấn nút "Ghi âm" rồi đọc câu/từ đã chọn, khi hoàn thành nhấn nút "Kết thúc"</h4>
+	  <select class="form-control" id='recordlist'>		
+	    <option value ="0000">Không</option>
+	    <option value ="0001">Một</option>
+	    <option value ="0002">Hai</option>
+	    <option value ="0003">Ba</option>
+	    <option value ="0004">Bốn</option>
+	    <option value ="0005">Năm</option>
+		<option value ="0006">Sáu</option>
+		<option value ="0007">Bẩy</option>
+		<option value ="0008">Tám</option>
+	    <option value ="0009">Chín</option>
+		<option value ="0010">Hà Nội</option>
+		<option value ="0011">Hồ Chí Minh</option>
+		<option value ="0012">Đà Nẵng</option>
+		<option value ="0013">Đà Lạt</option>
+		<option value ="0014">Cần Thơ</option>
+		<option value ="1000">không một hai ba ba sáu tám</option>
+		<option value ="1001">một một ba bẩy bẩy sáu bốn</option>
+		<option value ="1002">không không một tám năm chín</option>		
+		<option value ="1003">một hai ba năm tám</option>
+		<option value ="1004">sáu bẩy tám hai hai chín bốn</option>
+		<option value ="1005">năm bẩy tám sáu</option>		
+		<option value ="1006">hai năm chín ba</option>
+		<option value ="1007">tám tám sáu bẩy bẩy</option>
+		<option value ="1008">hai ba một bốn</option>
+		<option value ="1009">chín sáu ba không</option>
+		<option value ="1010">bẩy ba năm chín</option>	
+		<option value ="1011">chín sáu năm không</option>	
+		<option value ="1012">bốn bốn hai ba ba bẩy sáu</option>	
+		<option value ="1013">một không bốn bảy chín</option>	
+		<option value ="1014">năm năm tám sáu ba</option>	
+		<option value ="1015">tám tám năm sáu bẩy ba</option>	
+		<option value ="1016">ba ba ba bốn bốn bẩy bảy</option>	
+		<option value ="1017">không một hai ba bốn năm sáu bẩy tám chín</option>	
+		<option value ="1018">chín tám bảy sáu năm bốn ba hai một không</option>	
+		<option value ="1019" selected>không một hai ba bốn năm sáu bẩy tám chín, Hà Nội, Huế, Đà Nẵng, Đà Lạt, Hồ Chí Minh, Cần Thơ</option>	
+		
+	  </select>
+	  	<br>
+		
+		<h4>Thông tin của bạn (chỉ mang tính chất thống kê)</h4>
+		<span>Giới tính:</span>
+		<select id='sex'>
+	  	  	<option value='male' selected>Nam</option>
+	  		<option value='female'>Nữ</option>
+	  		<option value='other'>Khác</option>
+		</select>	
+		</br>
+		<span>Độ tuổi:</span>
+		<select id='age'>
+		  <option value='1x'>10-19</option>
+		  <option value='2x' selected>20-29</option>
+		  <option value='3x'>30-39</option>
+		  <option value='4x'>40-49</option>
+		  <option value='5x'>50-59</option>
+		  <option value='6x'>60-69</option>
+		  <option value='7x'>70-79</option>
+		</select>
+		
+		<br></br>
+		<h4>Tiến Hành Ghi Âm Giọng Nói</h4>
+		<div id='recoder_tab'>
+		<a href="#" id='time' style="display: none">0:00</a>
+		<a href="javascript:record()"  id="record" class="btn main-btn btn-success" >Ghi Âm</a>
+		<a href="javascript:play()"  id="play" style="display: none" class="btn main-btn btn-success" >Nghe Lại</a>
+		<a href="javascript:stop()" id="stop" style="display: none" class="btn main-btn btn-success" >Kết Thúc</a>
+		<a href="javascript:upload()" id="stouploadp" style="display: none" class="btn main-btn btn-primary" >Gửi File</a>
+		</div>
+		<div id='uploader_tab' style="display: none">
+			<span>Vui lòng đợi chương trình gửi file ghi âm lên sever ...</span>
+		</div>
+	  	</br>
+  		</br>
+		<div class="footer">
+        	<p>VN Speech Recogptiton Online -  HaTruong 2014</p>
+      	</div> 
+    </div> <!-- /container -->
+
+	<script language="javascript" content-type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/flashrecorder/fl-recorder.js"></script>
+    <script>
+
+      function timecode(ms) {
+        var hms = {
+          h: Math.floor(ms/(60*60*1000)),
+          m: Math.floor((ms/60000) % 60),
+          s: Math.floor((ms/1000) % 60)
+        };
+        var tc = []; // Timecode array to be joined with '.'
+
+        if (hms.h > 0) {
+          tc.push(hms.h);
+        }
+
+        tc.push((hms.m < 10 && hms.h > 0 ? "0" + hms.m : hms.m));
+        tc.push((hms.s < 10  ? "0" + hms.s : hms.s));
+
+        return tc.join(':');
+      }
+    
+	  function initUI() {
+		document.getElementById("recordlist").disabled=false;
+		$('#uploader_tab').hide();
+		$('#time').hide();
+		$('#record').show();
+		$('#stop').hide();
+		$('#play').hide();
+		$('#stouploadp').hide();
+	  }
+    
+	  function onRecordUI() {
+		//$('#recordlist').disabled = true;
+		document.getElementById("recordlist").disabled=true;
+		$('#time').show();
+		$('#record').hide();
+		$('#stop').show();
+		$('#play').hide();
+		$('#stouploadp').hide();
+	  }
+
+	  function onPlayUI() {
+		document.getElementById("recordlist").disabled=false;
+		$('#time').show();
+		$('#record').hide();
+		$('#stop').show();
+		$('#play').hide();
+		$('#stouploadp').hide();
+	  }
+	  
+	  function uploadUI() {
+		document.getElementById("recordlist").disabled=false;
+		$('#time').show();
+		$('#record').show();
+		$('#stop').hide();
+		$('#play').show();
+		$('#stouploadp').show();
+	  }
+	
+      Recorder.initialize({
+        swfSrc: "js/flashrecorder/fl-recorder.swf"
+      });
+
+      function record(){
+		onRecordUI();
+        Recorder.record({
+          start: function(){
+            //alert("recording starts now. press stop when youre done. and then play or upload if you want.");
+          },
+          progress: function(milliseconds){
+            document.getElementById("time").innerHTML = timecode(milliseconds);
+          }
+        });
+      }
+      
+      function play(){
+		onPlayUI();
+        Recorder.stop();
+        Recorder.play({
+          progress: function(milliseconds){
+            document.getElementById("time").innerHTML = timecode(milliseconds);
+          },
+		  finished: function(){
+            uploadUI();
+          }
+        });
+      }
+      
+      function stop(){
+		uploadUI();
+        Recorder.stop();
+      }
+      
+      function upload(){
+		$('#recoder_tab').hide(); 
+		$('#uploader_tab').show();
+		var rcodeSelectedValue = $( "#recordlist" ).val();
+		var userage = $( "#age" ).val();
+		var usersex = $( "#sex" ).val();
+
+		console.log(userage + "-" + usersex);
+        Recorder.upload({
+          url:        "http://www.tisme.org/vnspr-demo/uploader.php",
+          audioParam: "audiofile",           
+           params: {                                  
+             "rcode": rcodeSelectedValue,
+			 "age": userage,
+			 "sex": usersex,
+           },
+          success: function(){
+			$('#uploader_tab').hide();
+			initUI();
+			$('#recoder_tab').show();
+			alert("File ghi âm đã gửi thành công. Xin cảm ơn!");
+          }
+        });
+      }
+  </script>
+  </body>
+</html>
